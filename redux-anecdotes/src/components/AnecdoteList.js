@@ -2,11 +2,10 @@ import React from "react";
 import { vote } from "../reducers/anecdoteReducer";
 import Anecdote from "./Anecdote";
 
-const Anecdotes = ({ store }) => {
+const AnecdoteList = ({ store }) => {
   const anecdotes = store.getState().sort((a, b) => b.votes - a.votes);
   return (
-    <div className="Anecdotes">
-      <h2>Anecdotes</h2>
+    <div className="AnecdoteList">
       {anecdotes.map(a => (
         <Anecdote
           {...a}
@@ -20,4 +19,4 @@ const Anecdotes = ({ store }) => {
   );
 };
 
-export default Anecdotes;
+export default AnecdoteList;
