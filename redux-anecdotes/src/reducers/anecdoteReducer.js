@@ -51,5 +51,8 @@ export const generateId = () => Number((Math.random() * 1000000).toFixed(0));
 
 export const createAnecdote = content => {
   console.log("CREATE ANECDOTE FUNCTION");
-  return { type: "NEW ANECDOTE", data: { content, id: generateId() } };
+  return {
+    type: "NEW ANECDOTE",
+    data: { content, id: generateId(), votes: 0 }
+  };
 };

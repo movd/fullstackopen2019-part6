@@ -1,15 +1,14 @@
 import React from "react";
 import { createAnecdote } from "../reducers/anecdoteReducer";
-const NewAnecdote = ({ store }) => {
+const AnecdoteForm = ({ store }) => {
   const addAnecdote = event => {
     event.preventDefault();
     const content = event.target.anecdote.value;
     event.target.anecdote.value = "";
     store.dispatch(createAnecdote(content));
-    createAnecdote();
   };
   return (
-    <div className="NewAnecdote">
+    <div className="AnecdoteForm">
       <h2>create new</h2>
       <form onSubmit={addAnecdote}>
         <div>
@@ -21,4 +20,4 @@ const NewAnecdote = ({ store }) => {
   );
 };
 
-export default NewAnecdote;
+export default AnecdoteForm;
