@@ -1,10 +1,9 @@
 import React from "react";
-const App = props => {
-  const anecdotes = props.store.getState();
+import NewAnecdote from "./components/NewAnencdote";
+import { vote } from "./reducers/anecdoteReducer";
 
-  const vote = id => {
-    props.store.dispatch({ type: "VOTE", data: { id } });
-  };
+const App = ({ store }) => {
+  const anecdotes = store.getState();
 
   return (
     <div>
@@ -14,17 +13,13 @@ const App = props => {
           <div>{anecdote.content}</div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => vote(anecdote.id)}>vote</button>
+            <button onClick={() => store.dispatch(vote(anecdote.id))}>
+              vote
+            </button>
           </div>
         </div>
       ))}
-      <h2>create new</h2>
-      <form>
-        <div>
-          <input />
-        </div>
-        <button>create</button>
-      </form>
+      <NewAnecdote store={store} />
     </div>
   );
 };

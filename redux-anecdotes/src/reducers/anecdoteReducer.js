@@ -33,9 +33,23 @@ const reducer = (state = initialState, action) => {
       };
       // Return array of anecdotes where at the index of anecdoteToChange the new one is inserted
       return state.map(a => (a.id !== id ? a : changedAnecdote));
+    case "NEW ANECDOTE":
+      console.log(action.data);
+      return [...state, action.data];
     default:
       return state;
   }
 };
 
 export default reducer;
+
+export const vote = id => {
+  return { type: "VOTE", data: { id } };
+};
+
+export const generateId = () => Number((Math.random() * 1000000).toFixed(0));
+
+export const createAnecdote = content => {
+  console.log("CREATE ANECDOTE FUNCTION");
+  return { type: "NEW ANECDOTE", data: { content, id: generateId() } };
+};
