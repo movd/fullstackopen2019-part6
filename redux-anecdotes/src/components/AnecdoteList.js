@@ -3,7 +3,9 @@ import { vote } from "../reducers/anecdoteReducer";
 import Anecdote from "./Anecdote";
 
 const AnecdoteList = ({ store }) => {
-  const anecdotes = store.getState().sort((a, b) => b.votes - a.votes);
+  const anecdotes = store
+    .getState()
+    .anecdotes.sort((a, b) => b.votes - a.votes);
   return (
     <div className="AnecdoteList">
       {anecdotes.map(a => (
