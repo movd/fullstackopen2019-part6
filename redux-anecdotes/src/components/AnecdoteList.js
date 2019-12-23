@@ -1,11 +1,23 @@
 import React from "react";
 import { vote } from "../reducers/anecdoteReducer";
 import Anecdote from "./Anecdote";
+import { setNotification } from "../reducers/notificationReducer";
 
 const AnecdoteList = ({ store }) => {
   const anecdotes = store
     .getState()
     .anecdotes.sort((a, b) => b.votes - a.votes);
+
+  const handleClick = anecdote => {
+    console.log(anecdote);
+
+    store.dispatch(vote(anecdote.id));
+    store.dispatch(setNotification(`you voted '${anecdote.content}'`));
+    setTimeout(() => {
+      store.dispatch(setNotification(null));
+    }, 5000);
+  };
+
   return (
     <div className="AnecdoteList">
       {anecdotes.map(a => (
@@ -14,7 +26,7 @@ const AnecdoteList = ({ store }) => {
           key={a.id}
           content={a.content}
           votes={a.votes}
-          handleClick={() => store.dispatch(vote(a.id))}
+          handleClick={() => handleClick(a)}
         />
       ))}
     </div>
