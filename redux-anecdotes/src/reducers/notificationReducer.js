@@ -1,7 +1,6 @@
 const initialState = null;
 
 const notificationReducer = (state = initialState, action) => {
-  console.log("ACTION: ", action);
   switch (action.type) {
     case "SET_NOTIFICATION":
       console.log(action.data);

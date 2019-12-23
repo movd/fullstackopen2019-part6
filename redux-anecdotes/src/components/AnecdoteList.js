@@ -4,9 +4,12 @@ import Anecdote from "./Anecdote";
 import { setNotification } from "../reducers/notificationReducer";
 
 const AnecdoteList = ({ store }) => {
-  const anecdotes = store
-    .getState()
-    .anecdotes.sort((a, b) => b.votes - a.votes);
+  const { anecdotes, filter } = store.getState();
+  const sortedAnecdotes = anecdotes.sort((a, b) => b.votes - a.votes);
+
+  const filteredAnecdotes = sortedAnecdotes.filter(a =>
+    a.content.toLowerCase().includes(filter.toLowerCase())
+  );
 
   const handleClick = anecdote => {
     console.log(anecdote);
@@ -20,7 +23,7 @@ const AnecdoteList = ({ store }) => {
 
   return (
     <div className="AnecdoteList">
-      {anecdotes.map(a => (
+      {filteredAnecdotes.map(a => (
         <Anecdote
           {...a}
           key={a.id}
