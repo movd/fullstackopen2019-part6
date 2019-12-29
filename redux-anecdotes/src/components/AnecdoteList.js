@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { vote } from "../reducers/anecdoteReducer";
 import Anecdote from "./Anecdote";
+import Filter from "./Filter";
 import { setNotification } from "../reducers/notificationReducer";
 
 const AnecdoteList = props => {
@@ -13,17 +14,16 @@ const AnecdoteList = props => {
   );
 
   const handleClick = anecdote => {
-    console.log("vote for: ", anecdote);
-
-    // store.dispatch(vote(anecdote.id));
-    // store.dispatch(setNotification(`you voted '${anecdote.content}'`));
-    // setTimeout(() => {
-    //   store.dispatch(setNotification(null));
-    // }, 5000);
+    props.vote(anecdote.id);
+    props.setNotification(`you voted '${anecdote.content}'`);
+    setTimeout(() => {
+      props.setNotification(null);
+    }, 5000);
   };
 
   return (
     <div className="AnecdoteList">
+      <Filter />
       {filteredAnecdotes.map(a => (
         <Anecdote
           {...a}
@@ -46,4 +46,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(AnecdoteList);
+// destructure action creators directly instead of mapDispatchToProps
+export default connect(mapStateToProps, { vote, setNotification })(
+  AnecdoteList
+);

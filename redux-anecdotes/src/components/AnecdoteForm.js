@@ -4,6 +4,9 @@ import { createAnecdote } from "../reducers/anecdoteReducer";
 import { setNotification } from "../reducers/notificationReducer";
 
 const AnecdoteForm = props => {
+  const style = {
+    marginBottom: 10
+  };
   const addAnecdote = event => {
     event.preventDefault();
     const content = event.target.anecdote.value;
@@ -15,7 +18,7 @@ const AnecdoteForm = props => {
     }, 5000);
   };
   return (
-    <div className="AnecdoteForm">
+    <div style={style} className="AnecdoteForm">
       <h2>create new</h2>
       <form onSubmit={addAnecdote}>
         <div>
