@@ -4,7 +4,7 @@ const Anecdote = ({ id, content, votes, handleClick }) => {
     <div className="Anecdote">
       <div>{content}</div>
       <div>
-        has {votes}
+        has {votes} votes
         <button onClick={handleClick}>vote</button>
       </div>
     </div>
