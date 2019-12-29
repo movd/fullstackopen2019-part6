@@ -28,10 +28,10 @@ export const vote = id => {
 
 export const generateId = () => Number((Math.random() * 1000000).toFixed(0));
 
-export const createAnecdote = content => {
+export const createAnecdote = data => {
   return {
     type: "NEW_ANECDOTE",
-    data: { content, id: generateId(), votes: 0 }
+    data
   };
 };
 
