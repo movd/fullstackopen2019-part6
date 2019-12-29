@@ -6,13 +6,6 @@ import Filter from "./Filter";
 import { setNotification } from "../reducers/notificationReducer";
 
 const AnecdoteList = props => {
-  // const { anecdotes, filter } = store.getState();
-  const sortedAnecdotes = props.anecdotes.sort((a, b) => b.votes - a.votes);
-
-  const filteredAnecdotes = sortedAnecdotes.filter(a =>
-    a.content.toLowerCase().includes(props.filter.toLowerCase())
-  );
-
   const handleClick = anecdote => {
     props.vote(anecdote.id);
     props.setNotification(`you voted '${anecdote.content}'`);
@@ -24,7 +17,7 @@ const AnecdoteList = props => {
   return (
     <div className="AnecdoteList">
       <Filter />
-      {filteredAnecdotes.map(a => (
+      {props.visibleAnecdotes.map(a => (
         <Anecdote
           {...a}
           key={a.id}
@@ -37,12 +30,18 @@ const AnecdoteList = props => {
   );
 };
 
+const filterAndSort = ({ anecdotes, filter }) => {
+  const filteredAnecdotes = anecdotes.filter(a =>
+    a.content.toLowerCase().includes(filter.toLowerCase())
+  );
+  return filteredAnecdotes.sort((a, b) => b.votes - a.votes);
+};
+
 const mapStateToProps = state => {
   // sometimes it is useful to console log from mapStateToProps
   console.log(state);
   return {
-    anecdotes: state.anecdotes,
-    filter: state.filter
+    visibleAnecdotes: filterAndSort(state)
   };
 };
 
