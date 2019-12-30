@@ -7,7 +7,7 @@ import { setNotification } from "../reducers/notificationReducer";
 
 const AnecdoteList = props => {
   const handleClick = anecdote => {
-    props.vote(anecdote.id);
+    props.vote(anecdote);
     props.setNotification(`you voted '${anecdote.content}'`);
     setTimeout(() => {
       props.setNotification(null);
