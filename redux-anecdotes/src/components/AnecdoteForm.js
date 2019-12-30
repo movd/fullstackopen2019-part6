@@ -1,7 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createAnecdote } from "../reducers/anecdoteReducer";
-import { setNotification } from "../reducers/notificationReducer";
+import {
+  setNotification,
+  clearNotification
+} from "../reducers/notificationReducer";
 
 const AnecdoteForm = props => {
   const style = {
@@ -14,7 +17,7 @@ const AnecdoteForm = props => {
     props.createAnecdote(content);
     props.setNotification(`you added '${content}'`);
     setTimeout(() => {
-      props.setNotification(null);
+      props.clearNotification();
     }, 5000);
   };
   return (
@@ -32,7 +35,8 @@ const AnecdoteForm = props => {
 
 const mapDispatchToProps = {
   createAnecdote,
-  setNotification
+  setNotification,
+  clearNotification
 };
 
 export default connect(null, mapDispatchToProps)(AnecdoteForm);
